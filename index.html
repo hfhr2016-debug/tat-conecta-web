@@ -348,6 +348,7 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
       <div class="campo"><label for="f-msg">¿En qué podemos ayudarte? <span class="req">*</span></label><textarea id="f-msg" required placeholder="Cuéntanos qué vendes y cómo manejas hoy tus pedidos y tus rutas"></textarea></div>
       <label class="acepto"><input id="f-acepto" type="checkbox" required><span>Acepto la <a href="privacidad/" target="_blank" rel="noopener">política de privacidad</a> y los <a href="terminos/" target="_blank" rel="noopener">términos y condiciones</a>. <span class="req">*</span></span></label>
       <div id="aviso" role="status" aria-live="polite"></div>
+      <button type="button" id="ver-copiar" class="btn btn-borde" hidden style="margin-top:8px">¿No se abrió tu correo? Copiar el mensaje</button>
       <button class="btn btn-marca" type="submit">Enviar mensaje</button>
     </form>
   </div>
@@ -361,6 +362,7 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
       </div>
       <div class="soporte-datos">
         <a class="btn btn-marca" id="sop-correo" href="#">Escribir a soporte</a>
+        <button type="button" id="sop-copiar" class="btn btn-borde">¿No se abre tu correo? Copiar los datos</button>
         <a class="btn btn-borde" id="sop-wa" href="#" hidden>Soporte por WhatsApp</a>
         <span class="leyenda">Horario de atención: <b id="sop-horario"></b></span>
       </div>
@@ -485,8 +487,10 @@ $("#faq-pago").textContent = PAGO_CON_TARJETA ? "Puedes pagar con tarjeta de cr�
 $("#txt-pago").textContent = PAGO_CON_TARJETA ? "Pagas con tarjeta (y tu plan se renueva solo), o por transferencia, Nequi o Daviplata." : "Pagas por transferencia, Nequi o Daviplata y activamos tu plan.";
 if (USUARIO_EXTRA > 0) $("#txt-extra").textContent = "¿Necesitas más usuarios? Cada usuario adicional cuesta " + plata(USUARIO_EXTRA) + " al mes."; else $("#txt-extra").hidden = true;
 
-/* Correo: en celular se abre la app de correo (mailto). En computador, que muchas veces no tiene programa de correo, se muestra una ventana con el correo, el asunto y el mensaje listos para copiar, y un botón para abrir Gmail. */
-const ES_PC = (() => { try { return !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && matchMedia("(pointer: fine)").matches; } catch (e) { return false; } })();
+/* Correo: los botones abren el programa de correo con el mensaje listo (mailto), en celular y en computador. Si no se abre, hay un enlace «Copiar el mensaje» que muestra una ventana con el correo, el asunto y el mensaje para copiar. */
+let ultimoMensaje = "";
+$("#sop-copiar").addEventListener("click", () => ventanaCorreo("Soporte TAT Conecta", ""));
+$("#ver-copiar").addEventListener("click", () => ventanaCorreo("Quiero información de TAT Conecta", ultimoMensaje));
 function ventanaCorreo(asunto, cuerpo) {
   $("#vc-para").value = CORREO_SOPORTE; $("#vc-asunto").value = asunto || ""; $("#vc-msg").value = cuerpo || "";
   $("#vc-msg-caja").hidden = !cuerpo; $("#vc-gmail").href = "https://mail.google.com/mail/?authuser=0&view=cm&fs=1&to=" + encodeURIComponent(CORREO_SOPORTE) + "&su=" + encodeURIComponent(asunto || "") + "&body=" + encodeURIComponent(cuerpo || "");
@@ -499,11 +503,6 @@ document.querySelectorAll("#ventana-correo [data-copiar]").forEach((b) => b.addE
 }));
 $("#vc-cerrar").addEventListener("click", () => { $("#ventana-correo").hidden = true; });
 $("#ventana-correo").addEventListener("click", (e) => { if (e.target.id === "ventana-correo") $("#ventana-correo").hidden = true; });
-document.addEventListener("click", (e) => {
-  const a = e.target.closest && e.target.closest('a[href^="mailto:"]'); if (!a || !ES_PC) return;
-  const u = new URL(a.getAttribute("href")); e.preventDefault();
-  ventanaCorreo(u.searchParams.get("subject"), u.searchParams.get("body"));
-});
 $("#sop-correo").href = "mailto:" + CORREO_SOPORTE + "?subject=" + encodeURIComponent("Soporte TAT Conecta");
 if (WHATSAPP) { const w = $("#sop-wa"); w.hidden = false; w.href = "https://wa.me/" + WHATSAPP.replace(/\D/g, ""); }
 if (HORARIO_SOPORTE) $("#sop-horario").textContent = HORARIO_SOPORTE; else $("#sop-horario").parentElement.hidden = true;
@@ -518,9 +517,9 @@ $("#form-contacto").addEventListener("submit", (e) => {
   if (!$("#f-acepto").checked) { av.className = "mal"; av.textContent = "Debes aceptar la política de privacidad y los términos."; return; }
   const equipo = (document.querySelector("input[name=equipo]:checked") || {}).value || "";
   const cuerpo = `Nombre: ${v("#f-nombre")}\nEmpresa: ${v("#f-empresa")}\nCorreo: ${v("#f-correo")}\nTeléfono: ${v("#f-tel")}\nPersonas que usarían la aplicación: ${equipo}\n\n${v("#f-msg")}`;
-  if (ES_PC) ventanaCorreo("Quiero información de TAT Conecta", cuerpo);
-  else location.href = "mailto:" + CORREO_SOPORTE + "?subject=" + encodeURIComponent("Quiero información de TAT Conecta") + "&body=" + encodeURIComponent(cuerpo);
-  av.className = "bien"; av.textContent = ES_PC ? "Te mostramos el mensaje listo para copiar o abrir en Gmail. También puedes escribir a " + CORREO_SOPORTE + "." : "Se abrió tu correo con el mensaje listo. Solo falta enviarlo.";
+  ultimoMensaje = cuerpo; $("#ver-copiar").hidden = false;
+  location.href = "mailto:" + CORREO_SOPORTE + "?subject=" + encodeURIComponent("Quiero información de TAT Conecta") + "&body=" + encodeURIComponent(cuerpo);
+  av.className = "bien"; av.textContent = "Se abrió tu correo con el mensaje listo. Solo falta enviarlo.";
 });
 </script>
 </body>
