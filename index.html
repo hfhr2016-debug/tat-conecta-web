@@ -133,6 +133,7 @@ nav.menu a.btn-marca,nav.menu a.btn-marca:hover{color:#fff}
 .paso p{color:var(--tinta2);margin-top:8px}
 @media(max-width:820px){.pasos{grid-template-columns:1fr}.paso::before{display:none}}
 
+#ventana-correo{position:fixed;inset:0;background:rgba(21,26,58,.6);z-index:100;display:grid;place-items:center;padding:16px}#ventana-correo[hidden]{display:none}#ventana-correo .vc{background:#fff;color:var(--tinta);border-radius:16px;padding:22px;max-width:480px;width:100%;max-height:90vh;overflow:auto;border:3px solid var(--tinta)}#ventana-correo label{display:block;font-weight:600;margin:12px 0 4px}#ventana-correo .vc-fila{display:flex;gap:8px}#ventana-correo .vc-fila input{flex:1}#ventana-correo textarea{width:100%}#ventana-correo .vc-pie{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 /* Planes */
 .planes{background:var(--tinta);color:#fff}
 .planes .intro p{color:#c3c8e6}
@@ -379,6 +380,11 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
   </div>
 </footer>
 
+<div id="ventana-correo" hidden role="dialog" aria-modal="true"><div class="vc"><h3 style="margin:0 0 4px">Escríbenos</h3><p style="margin:0;color:var(--tinta2)">Envía tu mensaje desde el correo que uses: copia los datos y pégalos en un correo nuevo.</p>
+<label for="vc-para">Para</label><div class="vc-fila"><input type="text" id="vc-para" readonly><button type="button" class="btn btn-borde" data-copiar="para">Copiar</button></div>
+<label for="vc-asunto">Asunto</label><div class="vc-fila"><input type="text" id="vc-asunto" readonly><button type="button" class="btn btn-borde" data-copiar="asunto">Copiar</button></div>
+<div id="vc-msg-caja"><label for="vc-msg">Mensaje</label><textarea id="vc-msg" rows="6" readonly></textarea><button type="button" class="btn btn-borde" data-copiar="msg" style="margin-top:8px">Copiar mensaje</button></div>
+<div class="vc-pie"><a id="vc-gmail" class="btn" target="_blank" rel="noopener noreferrer" href="#">Abrir en Gmail</a><button type="button" class="btn btn-borde" id="vc-cerrar">Cerrar</button></div></div></div>
 <script>
 /* ===== Ajustes: aquí se cambia todo lo importante ===== */
 const BORRADOR = false;                 // true muestra el cintillo de "borrador". Poner false al publicar.
@@ -479,13 +485,24 @@ $("#faq-pago").textContent = PAGO_CON_TARJETA ? "Puedes pagar con tarjeta de cr�
 $("#txt-pago").textContent = PAGO_CON_TARJETA ? "Pagas con tarjeta (y tu plan se renueva solo), o por transferencia, Nequi o Daviplata." : "Pagas por transferencia, Nequi o Daviplata y activamos tu plan.";
 if (USUARIO_EXTRA > 0) $("#txt-extra").textContent = "¿Necesitas más usuarios? Cada usuario adicional cuesta " + plata(USUARIO_EXTRA) + " al mes."; else $("#txt-extra").hidden = true;
 
-/* Correo: en celular se abre la app de correo (mailto). En computador, que muchas veces no tiene programa de correo, se abre Gmail en una pestaña nueva. */
+/* Correo: en celular se abre la app de correo (mailto). En computador, que muchas veces no tiene programa de correo, se muestra una ventana con el correo, el asunto y el mensaje listos para copiar, y un botón para abrir Gmail. */
 const ES_PC = (() => { try { return !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && matchMedia("(pointer: fine)").matches; } catch (e) { return false; } })();
-const urlGmail = (asunto, cuerpo) => "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(CORREO_SOPORTE) + "&su=" + encodeURIComponent(asunto || "") + "&body=" + encodeURIComponent(cuerpo || "");
+function ventanaCorreo(asunto, cuerpo) {
+  $("#vc-para").value = CORREO_SOPORTE; $("#vc-asunto").value = asunto || ""; $("#vc-msg").value = cuerpo || "";
+  $("#vc-msg-caja").hidden = !cuerpo; $("#vc-gmail").href = "https://mail.google.com/mail/?authuser=0&view=cm&fs=1&to=" + encodeURIComponent(CORREO_SOPORTE) + "&su=" + encodeURIComponent(asunto || "") + "&body=" + encodeURIComponent(cuerpo || "");
+  document.querySelectorAll("#ventana-correo [data-copiar]").forEach((b) => { b.textContent = b.dataset.copiar === "msg" ? "Copiar mensaje" : "Copiar"; });
+  $("#ventana-correo").hidden = false;
+}
+document.querySelectorAll("#ventana-correo [data-copiar]").forEach((b) => b.addEventListener("click", async () => {
+  const campo = { para: "#vc-para", asunto: "#vc-asunto", msg: "#vc-msg" }[b.dataset.copiar];
+  try { await navigator.clipboard.writeText($(campo).value); b.textContent = "Copiado"; } catch (e) { $(campo).select(); b.textContent = "Selecciona y copia con Ctrl+C"; }
+}));
+$("#vc-cerrar").addEventListener("click", () => { $("#ventana-correo").hidden = true; });
+$("#ventana-correo").addEventListener("click", (e) => { if (e.target.id === "ventana-correo") $("#ventana-correo").hidden = true; });
 document.addEventListener("click", (e) => {
   const a = e.target.closest && e.target.closest('a[href^="mailto:"]'); if (!a || !ES_PC) return;
   const u = new URL(a.getAttribute("href")); e.preventDefault();
-  window.open(urlGmail(u.searchParams.get("subject"), u.searchParams.get("body")), "_blank", "noopener");
+  ventanaCorreo(u.searchParams.get("subject"), u.searchParams.get("body"));
 });
 $("#sop-correo").href = "mailto:" + CORREO_SOPORTE + "?subject=" + encodeURIComponent("Soporte TAT Conecta");
 if (WHATSAPP) { const w = $("#sop-wa"); w.hidden = false; w.href = "https://wa.me/" + WHATSAPP.replace(/\D/g, ""); }
@@ -501,9 +518,9 @@ $("#form-contacto").addEventListener("submit", (e) => {
   if (!$("#f-acepto").checked) { av.className = "mal"; av.textContent = "Debes aceptar la política de privacidad y los términos."; return; }
   const equipo = (document.querySelector("input[name=equipo]:checked") || {}).value || "";
   const cuerpo = `Nombre: ${v("#f-nombre")}\nEmpresa: ${v("#f-empresa")}\nCorreo: ${v("#f-correo")}\nTeléfono: ${v("#f-tel")}\nPersonas que usarían la aplicación: ${equipo}\n\n${v("#f-msg")}`;
-  if (ES_PC) window.open(urlGmail("Quiero información de TAT Conecta", cuerpo), "_blank", "noopener");
+  if (ES_PC) ventanaCorreo("Quiero información de TAT Conecta", cuerpo);
   else location.href = "mailto:" + CORREO_SOPORTE + "?subject=" + encodeURIComponent("Quiero información de TAT Conecta") + "&body=" + encodeURIComponent(cuerpo);
-  av.className = "bien"; av.textContent = ES_PC ? "Se abrió Gmail con el mensaje listo. Solo falta enviarlo. Si no lo usas, escribe a " + CORREO_SOPORTE + "." : "Se abrió tu correo con el mensaje listo. Solo falta enviarlo.";
+  av.className = "bien"; av.textContent = ES_PC ? "Te mostramos el mensaje listo para copiar o abrir en Gmail. También puedes escribir a " + CORREO_SOPORTE + "." : "Se abrió tu correo con el mensaje listo. Solo falta enviarlo.";
 });
 </script>
 </body>
