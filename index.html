@@ -391,6 +391,7 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
 /* ===== Ajustes: aquí se cambia todo lo importante ===== */
 const BORRADOR = false;                 // true muestra el cintillo de "borrador". Poner false al publicar.
 const URL_APP = "https://tat-conecta-ventas.vercel.app";                    // Dirección de la aplicación. Vacío = misma dirección que esta página. Ej.: "https://app.tuempresa.com"
+const REGISTRO_ABIERTO = false;   // false: los botones de «Probar gratis» llevan al formulario de contacto (aún no se abre el registro). true: llevan a la aplicación.
 const PAGO_CON_TARJETA = false;       // Dejar en true solo cuando el pago con tarjeta (con renovación automática) esté funcionando.
 const USUARIO_EXTRA = 12000;          // Valor mensual de cada usuario adicional. Poner 0 para no mostrarlo.
 const CORREO_SOPORTE = "tatconecta@gmail.com";
@@ -446,8 +447,10 @@ const plata = (n) => "$" + Math.round(n).toLocaleString("es-CO");
 let anual = false;
 
 if (BORRADOR) $("#borrador").hidden = false;
-const irApp = URL_APP.replace(/\/$/, "") + "/?registro=1";
-document.querySelectorAll("[data-app]").forEach((a) => (a.href = irApp));
+const irApp = REGISTRO_ABIERTO ? URL_APP.replace(/\/$/, "") + "/?registro=1" : "#contacto";
+const TXT_PROBAR = REGISTRO_ABIERTO ? "Probar gratis" : "Pedir acceso";
+const TXT_PROBAR_15 = REGISTRO_ABIERTO ? "Probar 15 días gratis" : "Pedir mi prueba gratis";
+document.querySelectorAll("[data-app]").forEach((a) => { a.href = irApp; if (!REGISTRO_ABIERTO) a.textContent = a.classList.contains("btn-chico") ? TXT_PROBAR : TXT_PROBAR_15; });
 if (WHATSAPP) { $("#wa-txt").innerHTML = '<a href="https://wa.me/' + WHATSAPP.replace(/\D/g, "") + '">' + WHATSAPP + "</a>"; } else { $("#wa-txt").parentElement.hidden = true; }
 
 const COLOR_PLAN = ["#fedc01", "#f60201", "#1f9d00"];
@@ -469,7 +472,7 @@ function dibujarPlanes() {
         <div class="precio">${plata(total)} <small>${anual ? "/ año" : "/ mes"}</small></div>
         <p class="precio-nota">${nota}</p>
         <ul class="lista"><li class="si"><span class="m" aria-hidden="true">✓</span><span><b>Hasta ${p.usuarios} usuarios</b></span></li>${filas}<li class="si"><span class="m" aria-hidden="true">✓</span><span>${SOPORTE[p.id]}</span></li></ul>
-        <a class="btn ${p.destacado ? "btn-ruta" : "btn-marca"}" href="${irApp}">Probar 15 días gratis</a>
+        <a class="btn ${p.destacado ? "btn-ruta" : "btn-marca"}" href="${irApp}">${TXT_PROBAR_15}</a>
       </div>
     </article>`;
   }).join("");
