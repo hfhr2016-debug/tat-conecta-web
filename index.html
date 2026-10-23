@@ -479,6 +479,14 @@ $("#faq-pago").textContent = PAGO_CON_TARJETA ? "Puedes pagar con tarjeta de cr�
 $("#txt-pago").textContent = PAGO_CON_TARJETA ? "Pagas con tarjeta (y tu plan se renueva solo), o por transferencia, Nequi o Daviplata." : "Pagas por transferencia, Nequi o Daviplata y activamos tu plan.";
 if (USUARIO_EXTRA > 0) $("#txt-extra").textContent = "¿Necesitas más usuarios? Cada usuario adicional cuesta " + plata(USUARIO_EXTRA) + " al mes."; else $("#txt-extra").hidden = true;
 
+/* Correo: en celular se abre la app de correo (mailto). En computador, que muchas veces no tiene programa de correo, se abre Gmail en una pestaña nueva. */
+const ES_PC = (() => { try { return !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && matchMedia("(pointer: fine)").matches; } catch (e) { return false; } })();
+const urlGmail = (asunto, cuerpo) => "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(CORREO_SOPORTE) + "&su=" + encodeURIComponent(asunto || "") + "&body=" + encodeURIComponent(cuerpo || "");
+document.addEventListener("click", (e) => {
+  const a = e.target.closest && e.target.closest('a[href^="mailto:"]'); if (!a || !ES_PC) return;
+  const u = new URL(a.getAttribute("href")); e.preventDefault();
+  window.open(urlGmail(u.searchParams.get("subject"), u.searchParams.get("body")), "_blank", "noopener");
+});
 $("#sop-correo").href = "mailto:" + CORREO_SOPORTE + "?subject=" + encodeURIComponent("Soporte TAT Conecta");
 if (WHATSAPP) { const w = $("#sop-wa"); w.hidden = false; w.href = "https://wa.me/" + WHATSAPP.replace(/\D/g, ""); }
 if (HORARIO_SOPORTE) $("#sop-horario").textContent = HORARIO_SOPORTE; else $("#sop-horario").parentElement.hidden = true;
@@ -493,8 +501,9 @@ $("#form-contacto").addEventListener("submit", (e) => {
   if (!$("#f-acepto").checked) { av.className = "mal"; av.textContent = "Debes aceptar la política de privacidad y los términos."; return; }
   const equipo = (document.querySelector("input[name=equipo]:checked") || {}).value || "";
   const cuerpo = `Nombre: ${v("#f-nombre")}\nEmpresa: ${v("#f-empresa")}\nCorreo: ${v("#f-correo")}\nTeléfono: ${v("#f-tel")}\nPersonas que usarían la aplicación: ${equipo}\n\n${v("#f-msg")}`;
-  location.href = "mailto:" + CORREO_SOPORTE + "?subject=" + encodeURIComponent("Quiero información de TAT Conecta") + "&body=" + encodeURIComponent(cuerpo);
-  av.className = "bien"; av.textContent = "Se abrió tu correo con el mensaje listo. Solo falta enviarlo.";
+  if (ES_PC) window.open(urlGmail("Quiero información de TAT Conecta", cuerpo), "_blank", "noopener");
+  else location.href = "mailto:" + CORREO_SOPORTE + "?subject=" + encodeURIComponent("Quiero información de TAT Conecta") + "&body=" + encodeURIComponent(cuerpo);
+  av.className = "bien"; av.textContent = ES_PC ? "Se abrió Gmail con el mensaje listo. Solo falta enviarlo. Si no lo usas, escribe a " + CORREO_SOPORTE + "." : "Se abrió tu correo con el mensaje listo. Solo falta enviarlo.";
 });
 </script>
 </body>

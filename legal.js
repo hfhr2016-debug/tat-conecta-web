@@ -12,3 +12,14 @@ document.querySelectorAll("[data-l]").forEach((n) => {
   const v = window.LEGAL[n.dataset.l]; n.textContent = v;
   if (String(v).startsWith("[COMPLETAR")) n.classList.add("falta");
 });
+
+/* En computador no suele haber programa de correo: los enlaces de correo abren Gmail en una pestaña nueva. */
+(function () {
+  var pc = false; try { pc = !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && matchMedia("(pointer: fine)").matches; } catch (e) {}
+  if (!pc) return;
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="mailto:"]'); if (!a) return;
+    var u = new URL(a.getAttribute("href")); e.preventDefault();
+    window.open("https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(u.pathname) + "&su=" + encodeURIComponent(u.searchParams.get("subject") || "") + "&body=" + encodeURIComponent(u.searchParams.get("body") || ""), "_blank", "noopener");
+  });
+})();
