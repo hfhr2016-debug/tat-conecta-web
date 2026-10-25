@@ -57,11 +57,12 @@ header.top .caja{display:flex;align-items:center;gap:24px;height:88px}
 .marca .tit{white-space:nowrap}
 .marca .nom small{display:block;font:italic 400 1.02rem Fraunces,Georgia,"Times New Roman",serif;letter-spacing:.01em;color:var(--marca);margin-top:3px;line-height:1.2}
 
-@media(max-width:560px){nav.menu .btn{white-space:nowrap;padding:10px 12px;font-size:.9rem}header.top .caja{gap:10px}.marca .nom small{font-size:.82rem;margin-top:2px}.marca{font-size:1.45rem;gap:10px}.marca img{width:54px;height:54px;border-radius:13px}header.top .caja{height:76px}}
+@media(max-width:560px){.marca .nom small{display:none}.marca{font-size:1.05rem;gap:6px;min-width:0;flex:0 1 auto}.marca img{width:40px!important;height:40px!important}nav.menu{gap:6px;flex:1 0 auto;justify-content:flex-end}nav.menu .btn{white-space:nowrap;padding:8px 10px;font-size:.82rem}header.top .caja{gap:10px}header.top .caja{height:76px}}
 nav.menu{margin-left:auto;display:flex;gap:26px;align-items:center}
 nav.menu a{color:var(--tinta);text-decoration:none;font-weight:500;font-size:.98rem}
 nav.menu a:hover{color:var(--marca)}
 nav.menu a.btn-marca,nav.menu a.btn-marca:hover{color:#fff}
+nav.menu a.btn-entrar{border:2px solid var(--marca);color:var(--marca);background:transparent;font-weight:700}nav.menu a.btn-entrar:hover{background:var(--marca);color:#fff}
 @media(max-width:820px){nav.menu a.enl{display:none}}
 
 /* Portada */
@@ -223,6 +224,7 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
       <a class="enl" href="#preguntas">Preguntas</a>
       <a class="enl" href="#contacto">Contacto</a>
       <a class="enl" href="#soporte">Soporte</a>
+      <a class="btn btn-entrar btn-chico" data-entrar-app href="#">Entrar</a>
       <a class="btn btn-marca btn-chico" data-app href="#">Probar gratis</a>
     </nav>
   </div>
@@ -450,6 +452,7 @@ if (BORRADOR) $("#borrador").hidden = false;
 const irApp = REGISTRO_ABIERTO ? URL_APP.replace(/\/$/, "") + "/?registro=1" : "#contacto";
 const TXT_PROBAR = REGISTRO_ABIERTO ? "Probar gratis" : "Pedir acceso";
 const TXT_PROBAR_15 = REGISTRO_ABIERTO ? "Probar 15 días gratis" : "Pedir mi prueba gratis";
+document.querySelectorAll("[data-entrar-app]").forEach((a) => { a.href = URL_APP; });   // «Entrar»: para quien ya tiene su cuenta
 document.querySelectorAll("[data-app]").forEach((a) => { a.href = irApp; if (!REGISTRO_ABIERTO) a.textContent = a.classList.contains("btn-chico") ? TXT_PROBAR : TXT_PROBAR_15; });
 if (WHATSAPP) { $("#wa-txt").innerHTML = '<a href="https://wa.me/' + WHATSAPP.replace(/\D/g, "") + '">' + WHATSAPP + "</a>"; } else { $("#wa-txt").parentElement.hidden = true; }
 
