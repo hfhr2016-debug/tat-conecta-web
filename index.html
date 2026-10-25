@@ -452,7 +452,7 @@ if (BORRADOR) $("#borrador").hidden = false;
 const irApp = REGISTRO_ABIERTO ? URL_APP.replace(/\/$/, "") + "/?registro=1" : "#contacto";
 const TXT_PROBAR = REGISTRO_ABIERTO ? "Probar gratis" : "Pedir acceso";
 const TXT_PROBAR_15 = REGISTRO_ABIERTO ? "Probar 15 días gratis" : "Pedir mi prueba gratis";
-document.querySelectorAll("[data-entrar-app]").forEach((a) => { a.href = URL_APP; });   // «Entrar»: para quien ya tiene su cuenta
+document.querySelectorAll("[data-entrar-app]").forEach((a) => { a.href = URL_APP.replace(/\/$/, "") + "/?entrar=1"; });   // «Entrar»: para quien ya tiene su cuenta
 document.querySelectorAll("[data-app]").forEach((a) => { a.href = irApp; if (!REGISTRO_ABIERTO) a.textContent = a.classList.contains("btn-chico") ? TXT_PROBAR : TXT_PROBAR_15; });
 if (WHATSAPP) { $("#wa-txt").innerHTML = '<a href="https://wa.me/' + WHATSAPP.replace(/\D/g, "") + '">' + WHATSAPP + "</a>"; } else { $("#wa-txt").parentElement.hidden = true; }
 
