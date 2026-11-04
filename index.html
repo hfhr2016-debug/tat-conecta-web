@@ -65,61 +65,56 @@ nav.menu a.btn-marca,nav.menu a.btn-marca:hover{color:#fff}
 nav.menu a.btn-entrar{border:2px solid var(--marca);color:var(--marca);background:transparent;font-weight:700}nav.menu a.btn-entrar:hover{background:var(--marca);color:#fff}
 @media(max-width:820px){nav.menu a.enl{display:none}}
 
-/* Portada (carrusel) */
-.portada{position:relative;background:var(--papel);border-bottom:1px solid var(--linea);overflow:hidden;padding:0}
-.p-der{position:absolute;top:0;right:0;bottom:0;width:46%;background:var(--bgc,#b6efcf);transition:background .7s ease}
-.portada .caja{position:relative;display:grid;grid-template-columns:1fr 46%;gap:0;align-items:center;min-height:640px;max-width:none;width:100%;padding:0 0 0 clamp(20px,5vw,96px)}
-.izq{padding:56px 40px 64px 0;max-width:640px}
-.textos{display:grid;overflow:hidden;padding-bottom:4px}
-.tx{grid-area:1/1;opacity:0;transform:translateX(70px);transition:transform .6s ease,opacity .45s ease;pointer-events:none;visibility:hidden}
-.tx.on{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition-delay:.35s}
-.tx.sal{opacity:0;transform:translateX(-90px);visibility:visible;transition-delay:0s}
-.portada p.lead{font-size:1.2rem;color:var(--tinta2);margin:20px 0 0;max-width:30em}
+/* Portada (carrusel a todo el ancho) */
+.portada{position:relative;overflow:hidden;border-bottom:1px solid var(--linea);background:#3a32c4;padding:0}
+.pista{display:flex;transition:transform .9s cubic-bezier(.65,0,.25,1);will-change:transform}
+.pista.sin{transition:none}
+.dia{flex:0 0 100%;position:relative;overflow:hidden;background:var(--g);color:#fff;min-height:660px;display:flex;align-items:center}
+.dia::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 30%,rgba(255,255,255,.22),transparent 38%),radial-gradient(circle at 8% 100%,rgba(0,0,0,.22),transparent 40%);pointer-events:none}
+.dia::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 1.6px,transparent 1.8px);background-size:26px 26px;-webkit-mask-image:linear-gradient(90deg,transparent 35%,#000 100%);mask-image:linear-gradient(90deg,transparent 35%,#000 100%);pointer-events:none}
+.dia-in{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:40px clamp(20px,6vw,110px) 70px}
+.izq{max-width:600px}
+.portada .tit{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.18)}
+.portada p.lead{font-size:1.2rem;color:rgba(255,255,255,.92);margin:20px 0 0;max-width:30em}
 .acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.nota{margin-top:14px;font-size:.92rem;color:var(--tinta2)}
-.puntos{display:flex;gap:10px;margin-top:26px}
-.puntos button{width:12px;height:12px;border-radius:50%;border:2px solid var(--marca);background:transparent;padding:0;cursor:pointer;transition:all .3s}
-.puntos button.on{background:var(--marca);width:30px;border-radius:99px}
-.puntos button:focus-visible{outline:3px solid var(--ruta);outline-offset:2px}
-.escena{position:relative;min-height:620px;display:grid;overflow:hidden}
-.esc{grid-area:1/1;position:relative;width:100%;display:flex;justify-content:center;align-items:center;opacity:0;transition:opacity .4s ease;visibility:hidden}
-.esc.on{opacity:1;visibility:visible;transition-delay:.45s}
-.esc.on.sinr{transition-delay:0s}
-.celular{width:236px;height:490px;border-radius:38px;background:var(--tinta);padding:10px;box-shadow:0 30px 60px -20px rgba(21,26,58,.45);position:relative;z-index:2}
+.portada .btn-borde{border-color:#fff;color:#fff}.portada .btn-borde:hover{background:#fff;color:var(--tinta)}
+.nota{margin-top:14px;font-size:.92rem;color:rgba(255,255,255,.85)}
+.puntos{position:absolute;left:0;right:0;bottom:24px;z-index:5;display:flex;justify-content:center;gap:12px}
+.puntos button{width:13px;height:13px;border-radius:50%;border:2px solid #fff;background:transparent;padding:0;cursor:pointer;transition:all .3s}
+.puntos button.on{background:#fff;width:34px;border-radius:99px}
+.puntos button:focus-visible,.flecha:focus-visible{outline:3px solid var(--ruta);outline-offset:2px}
+.flecha{position:absolute;top:50%;z-index:5;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:rgba(0,0,0,.18);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+.flecha:hover{background:rgba(255,255,255,.28)}
+.f-izq{left:14px}.f-der{right:14px}
+.esc{position:relative;display:flex;justify-content:center;align-items:center;min-height:560px}
+.celular{width:236px;height:490px;border-radius:38px;background:var(--tinta);padding:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);position:relative;z-index:2}
 .celular .pantalla{width:100%;height:100%;border-radius:29px;overflow:hidden;background:var(--fondo)}
 .celular img{width:100%;height:auto;display:block}
-.portatil{width:min(88%,400px);border-radius:14px 14px 4px 4px;background:var(--tinta);padding:10px 10px 12px;box-shadow:0 30px 60px -20px rgba(21,26,58,.45);position:relative}
+.portatil{width:min(88%,420px);border-radius:14px 14px 4px 4px;background:var(--tinta);padding:10px 10px 12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);position:relative;z-index:2}
 .portatil img{width:100%;height:auto;display:block;border-radius:6px;background:#fff}
 .portatil::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-14px;height:14px;background:#2a3060;border-radius:0 0 18px 18px}
 .ruta-svg{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
 .ruta-svg path{fill:none;stroke:var(--ruta);stroke-width:4;stroke-linecap:round;stroke-dasharray:2 11;animation:camina 1.6s linear infinite}
-.parada{position:absolute;z-index:4;background:var(--papel);border:2px solid var(--tinta);border-radius:999px;padding:7px 14px 7px 8px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:.92rem;box-shadow:0 6px 0 -2px var(--tinta)}
-.parada img{width:26px;height:26px}
-.p1{top:50px;left:-14px}.p2{top:190px;right:-20px}.p3{top:340px;left:-20px}.p4{top:470px;right:-10px}
-.esc .celular{margin:20px 0}
-.esc .parada{background:#fff;border:1px solid rgba(21,26,58,.08);border-radius:14px;box-shadow:0 10px 28px -8px rgba(21,26,58,.28),0 2px 6px rgba(21,26,58,.08);padding:9px 16px 9px 9px;gap:11px;font-weight:600;color:var(--tinta);line-height:1.2}
-.esc .parada img{box-sizing:content-box;padding:6px;border-radius:10px;width:26px!important;height:26px!important}
-.esc .p1 img{background:#fff0b3}.esc .p2 img{background:#c9f0d9}.esc .p3 img{background:#cfe0ff}.esc .p4 img{background:#ffd3e0}
-.esc .parada .pt{color:var(--tinta2)}
-.esc .p1{left:3%}.esc .p2{right:3%}.esc .p3{left:3%}.esc .p4{right:3%}.esc .parada{font-size:1rem}.esc .parada.suave{animation:flota 4s ease-in-out infinite}
-.esc .parada.suave:nth-of-type(2n){animation-delay:-2s}
-.esc .parada img,.esc .parada.suave img{width:30px;height:30px}
-.esc .parada .pt{display:block;font-weight:600;font-size:.84rem;color:var(--tinta2);line-height:1.1}
-.adorno{position:absolute;border-radius:50%;background:rgba(255,255,255,.4);z-index:1}
-.ad1{width:220px;height:220px;top:30px;left:6%}.ad2{width:120px;height:120px;bottom:40px;right:8%}
-.esc.on .celular,.esc.on .portatil{animation:entra .7s ease both .45s}
-@keyframes flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-@keyframes entra{from{transform:translateY(24px) scale(.97)}to{transform:none}}
+.parada{position:absolute;z-index:4;background:#fff;color:var(--tinta);border:1px solid rgba(21,26,58,.08);border-radius:14px;box-shadow:0 10px 28px -8px rgba(0,0,0,.4),0 2px 6px rgba(0,0,0,.1);padding:9px 16px 9px 9px;display:flex;align-items:center;gap:11px;font-weight:600;font-size:1rem;line-height:1.2;animation:flota 4s ease-in-out infinite}
+.parada:nth-of-type(2n){animation-delay:-2s}
+.parada img{box-sizing:content-box;padding:6px;border-radius:10px;width:26px;height:26px}
+.parada .pt{display:block;font-weight:600;font-size:.84rem;color:var(--tinta2)}
+.p1{top:50px;left:3%}.p2{top:190px;right:3%}.p3{top:340px;left:3%}.p4{top:470px;right:3%}
+.p1 img{background:#fff0b3}.p2 img{background:#c9f0d9}.p3 img{background:#cfe0ff}.p4 img{background:#ffd3e0}
+.adorno{position:absolute;border-radius:50%;background:rgba(255,255,255,.14);z-index:1}
+.ad1{width:260px;height:260px;top:20px;left:10%}.ad2{width:130px;height:130px;bottom:30px;right:10%}
+.dia.on .celular,.dia.on .portatil{animation:entra .8s ease both .5s}
 @keyframes camina{to{stroke-dashoffset:-26}}
-@media(prefers-reduced-motion:reduce){.ruta-svg path{animation:none}html{scroll-behavior:auto}.tx,.esc,.p-der{transition:none!important}.esc .parada.suave,.esc.on .celular,.esc.on .portatil{animation:none!important}}
+@keyframes flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes entra{from{transform:translateY(26px) scale(.97)}to{transform:none}}
+@media(prefers-reduced-motion:reduce){.ruta-svg path,.parada,.dia.on .celular,.dia.on .portatil{animation:none!important}.pista{transition:none}html{scroll-behavior:auto}}
 @media(max-width:900px){
-  .p-der{display:none}
-  .portada .caja{grid-template-columns:1fr;gap:0;min-height:0}
-  .izq{padding:40px 0 28px}
-  .escena{background:var(--bgc,#b6efcf);transition:background .7s ease;min-height:600px}
-  .portada .caja{padding:0}.izq{padding:40px 20px 28px;max-width:none}
-  .esc .parada{font-size:.84rem;padding:6px 11px 6px 7px}.esc .parada img{width:20px!important;height:20px!important}.celular{width:220px;height:460px}
-  .esc .p1{left:3%}.esc .p2{right:3%}.esc .p3{left:3%}.esc .p4{right:3%}
+  .dia{min-height:0;align-items:flex-start}
+  .dia-in{grid-template-columns:1fr;padding:34px 20px 70px;gap:10px}
+  .esc{min-height:560px}
+  .parada{font-size:.84rem;padding:6px 11px 6px 7px}.parada img{width:20px;height:20px}
+  .celular{width:220px;height:460px}
+  .flecha{display:none}
 }
 
 /* Lo que cambia */
@@ -265,40 +260,47 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
 
 <main id="inicio">
 <section class="portada" id="carrusel" aria-roledescription="carrusel" aria-label="Lo que hace TAT Conecta">
-  <div class="p-der"></div>
-  <div class="caja">
-    <div class="izq">
-      <div class="textos" aria-live="off">
-      <div class="tx on"><h1>De la visita al cobro, todo en el mismo celular</h1><p class="lead">TAT Conecta es el programa para distribuidoras: tus vendedores toman pedidos, tú armas las rutas, controlas el inventario y cobras lo que te deben. Sin cuadernos ni hojas sueltas.</p></div>
-      <div class="tx"><h2 class="tit">Todo tu catálogo en un solo lugar</h2><p class="lead">Crea tus productos con precio y costo, o impórtalos desde Excel. Búscalos por nombre o por código de barras.</p></div>
-      <div class="tx"><h2 class="tit">Sabe qué tienes en bodega, sin contar a mano</h2><p class="lead">El inventario baja con cada venta y sube con cada compra. Ves qué se está acabando antes de que te falte.</p></div>
-      <div class="tx"><h2 class="tit">Arma la ruta del día en un minuto</h2><p class="lead">Escoge los pedidos, asigna vehículo y conductor, y cada entrega queda a la vista en el celular.</p></div>
-      <div class="tx"><h2 class="tit">Mira cómo va tu negocio desde donde estés</h2><p class="lead">Ventas, cartera e informes siempre al día. Y cuando los necesites, los descargas en Excel.</p></div>
-      <div class="tx"><h2 class="tit">Cada persona ve solo lo que le toca</h2><p class="lead">Vendedor, conductor, bodega o administrador: cada uno entra con su usuario y trabaja en lo suyo.</p></div>
-      </div>
-      <div class="acciones">
-        <a class="btn btn-ruta" data-app href="#">Probar 15 días gratis</a>
-        <a class="btn btn-borde" href="#planes">Ver planes</a>
-      </div>
-      <p class="nota">No necesitas registrar ningún medio de pago. Creas tu empresa y empiezas hoy.</p>
-      <div class="puntos" role="tablist" aria-label="Elegir diapositiva"></div>
-    </div>
-    <div class="escena">
-      <div class="esc on" data-bg="#b6efcf">
-        <svg class="ruta-svg" viewBox="0 0 420 560" preserveAspectRatio="none" aria-hidden="true"><path d="M70 70 C 340 90, 380 150, 330 210 S 40 300, 60 360 S 360 420, 350 500"/></svg>
-        <div class="celular"><div class="pantalla"><img src="img/hero-venta.webp" alt="Pantalla de venta de TAT Conecta con productos, cantidades y total"></div></div>
-        <div class="parada p1"><img src="iconos/c_visitas.png" alt="">Visita al cliente</div>
-        <div class="parada p2"><img src="iconos/c_pedidos.png" alt="">Pedido tomado</div>
-        <div class="parada p3"><img src="iconos/c_despachos.png" alt="">Entrega en ruta</div>
-        <div class="parada p4"><img src="iconos/c_cobros.png" alt="">Cobro registrado</div>
-      </div>
-      <div class="esc" data-bg="#ffc4d9"><div class="celular"><div class="pantalla"><img src="img/hero-productos.webp" alt="Pantalla de productos de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_productos.png" alt=""><span>Importa desde Excel<span class=pt>Sin digitar uno por uno</span></span></div><div class="parada suave p2"><img src="iconos/c_stock.png" alt=""><span>Precio y existencias<span class=pt>Siempre a la vista</span></span></div><div class="parada suave p3"><img src="iconos/c_ventas.png" alt=""><span>Códigos de barras<span class=pt>Escanea con la cámara</span></span></div></div>
-      <div class="esc" data-bg="#ffe08a"><div class="celular"><div class="pantalla"><img src="img/hero-inventario.webp" alt="Pantalla de inventario de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_stock.png" alt=""><span>Aceite de girasol<span class=pt>Se está agotando</span></span></div><div class="parada suave p2"><img src="iconos/c_compras.png" alt=""><span>Compra recibida<span class=pt>Sube el inventario</span></span></div><div class="parada suave p3"><img src="iconos/c_productos.png" alt=""><span>Disponible y reservado<span class=pt>Sin sorpresas</span></span></div></div>
-      <div class="esc" data-bg="#b4d4ff"><div class="celular"><div class="pantalla"><img src="img/hero-rutas.webp" alt="Pantalla de rutas y despachos de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_despachos.png" alt=""><span>Conductor y vehículo<span class=pt>Asignados a la ruta</span></span></div><div class="parada suave p2"><img src="iconos/c_pedidos.png" alt=""><span>Remisión lista<span class=pt>Lista para entregar</span></span></div><div class="parada suave p3"><img src="iconos/c_cobros.png" alt=""><span>Cobro al entregar<span class=pt>Queda en cartera</span></span></div></div>
-      <div class="esc" data-bg="#ffc7a3"><div class="portatil"><img src="img/hero-indicadores.webp" alt="Indicadores de TAT Conecta en el computador" loading="lazy"></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_informes.png" alt=""><span>Ventas del día<span class=pt>Al instante</span></span></div><div class="parada suave p2"><img src="iconos/c_cobros.png" alt=""><span>Cartera por cobrar<span class=pt>Quién te debe</span></span></div><div class="parada suave p3"><img src="iconos/c_informes.png" alt=""><span>Descarga en Excel<span class=pt>Con un clic</span></span></div></div>
-      <div class="esc" data-bg="#d3c0ff"><div class="celular"><div class="pantalla"><img src="img/hero-portal.webp" alt="Portal de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_ventas.png" alt=""><span>Vendedor<span class=pt>Toma pedidos</span></span></div><div class="parada suave p2"><img src="iconos/c_despachos.png" alt=""><span>Conductor<span class=pt>Entrega y cobra</span></span></div><div class="parada suave p3"><img src="iconos/c_stock.png" alt=""><span>Bodega<span class=pt>Alista y controla</span></span></div><div class="parada suave p4"><img src="iconos/c_tablero.png" alt=""><span>Administrador<span class=pt>Ve todo</span></span></div></div>
-    </div>
+  <div class="pista">
+    <div class="dia" style="--g:linear-gradient(120deg,#3a32c4,#6d3df0 60%,#8b5cf6)"><div class="dia-in">
+        <div class="izq"><h1 class="tit">De la visita al cobro, todo en el mismo celular</h1><p class="lead">TAT Conecta es el programa para distribuidoras: tus vendedores toman pedidos, tú armas las rutas, controlas el inventario y cobras lo que te deben. Sin cuadernos ni hojas sueltas.</p>
+          <div class="acciones"><a class="btn btn-ruta" data-app href="#">Probar 15 días gratis</a><a class="btn btn-borde" href="#planes">Ver planes</a></div>
+          <p class="nota">No necesitas registrar ningún medio de pago. Creas tu empresa y empiezas hoy.</p></div>
+        <div class="esc"><svg class="ruta-svg" viewBox="0 0 420 560" preserveAspectRatio="none" aria-hidden="true"><path d="M70 70 C 340 90, 380 150, 330 210 S 40 300, 60 360 S 360 420, 350 500"/></svg><div class="celular"><div class="pantalla"><img src="img/hero-venta.webp" alt="Pantalla de venta de TAT Conecta con productos, cantidades y total"></div></div><div class="parada p1"><img src="iconos/c_visitas.png" alt=""><span>Visita al cliente</span></div><div class="parada p2"><img src="iconos/c_pedidos.png" alt=""><span>Pedido tomado</span></div><div class="parada p3"><img src="iconos/c_despachos.png" alt=""><span>Entrega en ruta</span></div><div class="parada p4"><img src="iconos/c_cobros.png" alt=""><span>Cobro registrado</span></div></div>
+    </div></div>
+    <div class="dia" style="--g:linear-gradient(120deg,#be185d,#e11d74 55%,#f472b6)"><div class="dia-in">
+        <div class="izq"><h2 class="tit">Todo tu catálogo en un solo lugar</h2><p class="lead">Crea tus productos con precio y costo, o impórtalos desde Excel. Búscalos por nombre o por código de barras.</p>
+          <div class="acciones"><a class="btn btn-ruta" data-app href="#">Probar 15 días gratis</a><a class="btn btn-borde" href="#planes">Ver planes</a></div>
+          <p class="nota">No necesitas registrar ningún medio de pago. Creas tu empresa y empiezas hoy.</p></div>
+        <div class="esc"><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="celular"><div class="pantalla"><img src="img/hero-productos.webp" alt="Pantalla de productos de TAT Conecta" loading="lazy"></div></div><div class="parada p1"><img src="iconos/c_productos.png" alt=""><span>Importa desde Excel<span class="pt">Sin digitar uno por uno</span></span></div><div class="parada p2"><img src="iconos/c_stock.png" alt=""><span>Precio y existencias<span class="pt">Siempre a la vista</span></span></div><div class="parada p3"><img src="iconos/c_ventas.png" alt=""><span>Códigos de barras<span class="pt">Escanea con la cámara</span></span></div></div>
+    </div></div>
+    <div class="dia" style="--g:linear-gradient(120deg,#b45309,#e08a00 55%,#fbbf24)"><div class="dia-in">
+        <div class="izq"><h2 class="tit">Sabe qué tienes en bodega, sin contar a mano</h2><p class="lead">El inventario baja con cada venta y sube con cada compra. Ves qué se está acabando antes de que te falte.</p>
+          <div class="acciones"><a class="btn btn-ruta" data-app href="#">Probar 15 días gratis</a><a class="btn btn-borde" href="#planes">Ver planes</a></div>
+          <p class="nota">No necesitas registrar ningún medio de pago. Creas tu empresa y empiezas hoy.</p></div>
+        <div class="esc"><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="celular"><div class="pantalla"><img src="img/hero-inventario.webp" alt="Pantalla de inventario de TAT Conecta" loading="lazy"></div></div><div class="parada p1"><img src="iconos/c_stock.png" alt=""><span>Aceite de girasol<span class="pt">Se está agotando</span></span></div><div class="parada p2"><img src="iconos/c_compras.png" alt=""><span>Compra recibida<span class="pt">Sube el inventario</span></span></div><div class="parada p3"><img src="iconos/c_productos.png" alt=""><span>Disponible y reservado<span class="pt">Sin sorpresas</span></span></div></div>
+    </div></div>
+    <div class="dia" style="--g:linear-gradient(120deg,#1d4ed8,#2563eb 55%,#38bdf8)"><div class="dia-in">
+        <div class="izq"><h2 class="tit">Arma la ruta del día en un minuto</h2><p class="lead">Escoge los pedidos, asigna vehículo y conductor, y cada entrega queda a la vista en el celular.</p>
+          <div class="acciones"><a class="btn btn-ruta" data-app href="#">Probar 15 días gratis</a><a class="btn btn-borde" href="#planes">Ver planes</a></div>
+          <p class="nota">No necesitas registrar ningún medio de pago. Creas tu empresa y empiezas hoy.</p></div>
+        <div class="esc"><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="celular"><div class="pantalla"><img src="img/hero-rutas.webp" alt="Pantalla de rutas y despachos de TAT Conecta" loading="lazy"></div></div><div class="parada p1"><img src="iconos/c_despachos.png" alt=""><span>Conductor y vehículo<span class="pt">Asignados a la ruta</span></span></div><div class="parada p2"><img src="iconos/c_pedidos.png" alt=""><span>Remisión lista<span class="pt">Lista para entregar</span></span></div><div class="parada p3"><img src="iconos/c_cobros.png" alt=""><span>Cobro al entregar<span class="pt">Queda en cartera</span></span></div></div>
+    </div></div>
+    <div class="dia" style="--g:linear-gradient(120deg,#c2410c,#ea580c 55%,#fb923c)"><div class="dia-in">
+        <div class="izq"><h2 class="tit">Mira cómo va tu negocio desde donde estés</h2><p class="lead">Ventas, cartera e informes siempre al día. Y cuando los necesites, los descargas en Excel.</p>
+          <div class="acciones"><a class="btn btn-ruta" data-app href="#">Probar 15 días gratis</a><a class="btn btn-borde" href="#planes">Ver planes</a></div>
+          <p class="nota">No necesitas registrar ningún medio de pago. Creas tu empresa y empiezas hoy.</p></div>
+        <div class="esc"><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="portatil"><img src="img/hero-indicadores.webp" alt="Indicadores de TAT Conecta en el computador" loading="lazy"></div><div class="parada p1"><img src="iconos/c_informes.png" alt=""><span>Ventas del día<span class="pt">Al instante</span></span></div><div class="parada p2"><img src="iconos/c_cobros.png" alt=""><span>Cartera por cobrar<span class="pt">Quién te debe</span></span></div><div class="parada p3"><img src="iconos/c_informes.png" alt=""><span>Descarga en Excel<span class="pt">Con un clic</span></span></div></div>
+    </div></div>
+    <div class="dia" style="--g:linear-gradient(120deg,#0f766e,#0d9488 55%,#2dd4bf)"><div class="dia-in">
+        <div class="izq"><h2 class="tit">Cada persona ve solo lo que le toca</h2><p class="lead">Vendedor, conductor, bodega o administrador: cada uno entra con su usuario y trabaja en lo suyo.</p>
+          <div class="acciones"><a class="btn btn-ruta" data-app href="#">Probar 15 días gratis</a><a class="btn btn-borde" href="#planes">Ver planes</a></div>
+          <p class="nota">No necesitas registrar ningún medio de pago. Creas tu empresa y empiezas hoy.</p></div>
+        <div class="esc"><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="celular"><div class="pantalla"><img src="img/hero-portal.webp" alt="Portal de TAT Conecta" loading="lazy"></div></div><div class="parada p1"><img src="iconos/c_ventas.png" alt=""><span>Vendedor<span class="pt">Toma pedidos</span></span></div><div class="parada p2"><img src="iconos/c_despachos.png" alt=""><span>Conductor<span class="pt">Entrega y cobra</span></span></div><div class="parada p3"><img src="iconos/c_stock.png" alt=""><span>Bodega<span class="pt">Alista y controla</span></span></div><div class="parada p4"><img src="iconos/c_tablero.png" alt=""><span>Administrador<span class="pt">Ve todo</span></span></div></div>
+    </div></div>
   </div>
+  <button class="flecha f-izq" type="button" aria-label="Anterior">&#8249;</button>
+  <button class="flecha f-der" type="button" aria-label="Siguiente">&#8250;</button>
+  <div class="puntos" role="tablist" aria-label="Elegir diapositiva"></div>
 </section>
 
 <section class="cambia">
@@ -579,29 +581,29 @@ $("#form-contacto").addEventListener("submit", (e) => {
 <script>
 (function(){
   var sec=document.getElementById("carrusel"); if(!sec) return;
-  var tx=[].slice.call(sec.querySelectorAll(".tx")), es=[].slice.call(sec.querySelectorAll(".esc")), pts=sec.querySelector(".puntos"), esc=sec.querySelector(".escena"), der=sec.querySelector(".p-der");
-  var i=0, t=null, quieto=matchMedia("(prefers-reduced-motion:reduce)").matches, botones=[];
-  es.forEach(function(_,k){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-label","Ver diapositiva "+(k+1)+" de "+es.length);b.onclick=function(){ir(k,true)};pts.appendChild(b);botones.push(b)});
-  function color(k){var c=es[k].getAttribute("data-bg");sec.style.setProperty("--bgc",c)}
+  var pista=sec.querySelector(".pista"), dias=[].slice.call(pista.children), n=dias.length, pts=sec.querySelector(".puntos");
+  var clon=dias[0].cloneNode(true); clon.setAttribute("aria-hidden","true"); [].forEach.call(clon.querySelectorAll("a,button"),function(e){e.tabIndex=-1}); pista.appendChild(clon);
+  var i=0,t=null,quieto=matchMedia("(prefers-reduced-motion:reduce)").matches,bots=[],ocupado=false;
+  for(var k=0;k<n;k++)(function(k){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-label","Ver diapositiva "+(k+1)+" de "+n);b.onclick=function(){ir(k,true)};pts.appendChild(b);bots.push(b)})(k);
+  function mover(p,anim){pista.classList.toggle("sin",!anim);pista.style.transform="translateX(-"+(p*100)+"%)"}
+  function marcar(){var v=i%n;bots.forEach(function(b,m){b.classList.toggle("on",m===v);b.setAttribute("aria-selected",m===v)});dias.forEach(function(d,m){d.classList.toggle("on",m===v)})}
   function ir(k,manual){
-    k=(k+es.length)%es.length; if(k===i&&!manual){return}
-    if(k!==i){
-      tx[i].classList.remove("on");tx[i].classList.add("sal");var v=tx[i];setTimeout(function(){v.classList.remove("sal")},700);
-      es[i].classList.remove("on");
-      tx[k].classList.add("on");es[k].classList.add("on");
-      i=k;color(i);
-    }
-    botones.forEach(function(b,n){b.classList.toggle("on",n===i);b.setAttribute("aria-selected",n===i)});
+    if(ocupado&&!manual)return;
+    if(k<0)k=n-1; if(k>n)k=0;
+    i=k; mover(i,true); marcar();
+    if(i===n){ocupado=true;setTimeout(function(){i=0;mover(0,false);marcar();void pista.offsetWidth;ocupado=false},950)}
     if(manual)reiniciar();
   }
   function reiniciar(){clearInterval(t);if(!quieto)t=setInterval(function(){ir(i+1)},6500)}
-  var pausa=false;
+  sec.querySelector(".f-izq").onclick=function(){ir(i%n===0?n-1:(i%n)-1,true)};
+  sec.querySelector(".f-der").onclick=function(){ir((i%n)+1,true)};
   var x0=null;
   sec.addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
-  sec.addEventListener("touchend",function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(d)>50)ir(i+(d<0?1:-1),true)},{passive:true});
+  sec.addEventListener("touchend",function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(d)>50)ir(d<0?(i%n)+1:(i%n===0?n-1:(i%n)-1),true)},{passive:true});
   document.addEventListener("visibilitychange",function(){if(document.hidden)clearInterval(t);else reiniciar()});
-  color(0);ir(0,true);
+  marcar();reiniciar();
 })();
 </script>
+
 </body>
 </html>
