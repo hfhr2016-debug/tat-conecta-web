@@ -68,8 +68,8 @@ nav.menu a.btn-entrar{border:2px solid var(--marca);color:var(--marca);backgroun
 /* Portada (carrusel) */
 .portada{position:relative;background:var(--papel);border-bottom:1px solid var(--linea);overflow:hidden;padding:0}
 .p-der{position:absolute;top:0;right:0;bottom:0;width:46%;background:var(--bgc,#dff3e6);transition:background .7s ease}
-.portada .caja{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;min-height:640px}
-.izq{padding:56px 0 64px}
+.portada .caja{position:relative;display:grid;grid-template-columns:1fr 46%;gap:0;align-items:center;min-height:640px;max-width:none;width:100%;padding:0 0 0 clamp(20px,5vw,96px)}
+.izq{padding:56px 40px 64px 0;max-width:640px}
 .textos{display:grid;overflow:hidden;padding-bottom:4px}
 .tx{grid-area:1/1;opacity:0;transform:translateX(70px);transition:transform .6s ease,opacity .45s ease;pointer-events:none;visibility:hidden}
 .tx.on{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition-delay:.35s}
@@ -81,8 +81,8 @@ nav.menu a.btn-entrar{border:2px solid var(--marca);color:var(--marca);backgroun
 .puntos button{width:12px;height:12px;border-radius:50%;border:2px solid var(--marca);background:transparent;padding:0;cursor:pointer;transition:all .3s}
 .puntos button.on{background:var(--marca);width:30px;border-radius:99px}
 .puntos button:focus-visible{outline:3px solid var(--ruta);outline-offset:2px}
-.escena{position:relative;min-height:600px;display:grid}
-.esc{grid-area:1/1;position:relative;display:flex;justify-content:center;align-items:center;opacity:0;transition:opacity .4s ease;visibility:hidden}
+.escena{position:relative;min-height:620px;display:grid;overflow:hidden}
+.esc{grid-area:1/1;position:relative;width:100%;display:flex;justify-content:center;align-items:center;opacity:0;transition:opacity .4s ease;visibility:hidden}
 .esc.on{opacity:1;visibility:visible;transition-delay:.45s}
 .esc.on.sinr{transition-delay:0s}
 .celular{width:270px;height:560px;border-radius:38px;background:var(--tinta);padding:10px;box-shadow:0 30px 60px -20px rgba(21,26,58,.45);position:relative;z-index:2}
@@ -97,14 +97,25 @@ nav.menu a.btn-entrar{border:2px solid var(--marca);color:var(--marca);backgroun
 .parada img{width:26px;height:26px}
 .p1{top:40px;left:-14px}.p2{top:190px;right:-20px}.p3{top:340px;left:-20px}.p4{top:480px;right:-10px}
 .esc .celular{margin:20px 0}
+.esc .p1{left:3%}.esc .p2{right:3%}.esc .p3{left:3%}.esc .p4{right:3%}.esc .parada{font-size:.88rem}.esc .parada.suave{animation:flota 4s ease-in-out infinite}
+.esc .parada.suave:nth-of-type(2n){animation-delay:-2s}
+.esc .parada.suave img{width:22px;height:22px}
+.esc .parada .pt{display:block;font-weight:500;font-size:.78rem;color:var(--tinta2);line-height:1.1}
+.adorno{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);z-index:1}
+.ad1{width:220px;height:220px;top:30px;left:6%}.ad2{width:120px;height:120px;bottom:40px;right:8%}
+.esc.on .celular,.esc.on .portatil{animation:entra .7s ease both .45s}
+@keyframes flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes entra{from{transform:translateY(24px) scale(.97)}to{transform:none}}
 @keyframes camina{to{stroke-dashoffset:-26}}
-@media(prefers-reduced-motion:reduce){.ruta-svg path{animation:none}html{scroll-behavior:auto}.tx,.esc,.p-der{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.ruta-svg path{animation:none}html{scroll-behavior:auto}.tx,.esc,.p-der{transition:none!important}.esc .parada.suave,.esc.on .celular,.esc.on .portatil{animation:none!important}}
 @media(max-width:900px){
   .p-der{display:none}
   .portada .caja{grid-template-columns:1fr;gap:0;min-height:0}
   .izq{padding:40px 0 28px}
-  .escena{background:var(--bgc,#dff3e6);transition:background .7s ease;margin:0 -20px;min-height:600px}
-  .p1{left:4%}.p2{right:2%}.p3{left:2%}.p4{right:4%}
+  .escena{background:var(--bgc,#dff3e6);transition:background .7s ease;min-height:600px}
+  .portada .caja{padding:0}.izq{padding:40px 20px 28px;max-width:none}
+  .esc .parada{font-size:.8rem;padding:5px 10px 5px 6px}
+  .esc .p1{left:3%}.esc .p2{right:3%}.esc .p3{left:3%}.esc .p4{right:3%}
 }
 
 /* Lo que cambia */
@@ -276,10 +287,10 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
         <div class="parada p3"><img src="iconos/c_despachos.png" alt="">Entrega en ruta</div>
         <div class="parada p4"><img src="iconos/c_cobros.png" alt="">Cobro registrado</div>
       </div>
-      <div class="esc" data-bg="#f6ead3"><div class="celular"><div class="pantalla"><img src="img/hero-inventario.webp" alt="Pantalla de inventario de TAT Conecta" loading="lazy"></div></div></div>
-      <div class="esc" data-bg="#dbe8fa"><div class="celular"><div class="pantalla"><img src="img/hero-rutas.webp" alt="Pantalla de rutas y despachos de TAT Conecta" loading="lazy"></div></div></div>
-      <div class="esc" data-bg="#fde4d6"><div class="portatil"><img src="img/hero-indicadores.webp" alt="Indicadores de TAT Conecta en el computador" loading="lazy"></div></div>
-      <div class="esc" data-bg="#e8e0f7"><div class="celular"><div class="pantalla"><img src="img/hero-portal.webp" alt="Portal de TAT Conecta" loading="lazy"></div></div></div>
+      <div class="esc" data-bg="#f6ead3"><div class="celular"><div class="pantalla"><img src="img/hero-inventario.webp" alt="Pantalla de inventario de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_stock.png" alt=""><span>Aceite Premier<span class=pt>Se está agotando</span></span></div><div class="parada suave p2"><img src="iconos/c_compras.png" alt=""><span>Compra recibida<span class=pt>Sube el inventario</span></span></div><div class="parada suave p3"><img src="iconos/c_productos.png" alt=""><span>Disponible y reservado<span class=pt>Sin sorpresas</span></span></div></div>
+      <div class="esc" data-bg="#dbe8fa"><div class="celular"><div class="pantalla"><img src="img/hero-rutas.webp" alt="Pantalla de rutas y despachos de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_despachos.png" alt=""><span>Conductor y vehículo<span class=pt>Asignados a la ruta</span></span></div><div class="parada suave p2"><img src="iconos/c_pedidos.png" alt=""><span>Remisión lista<span class=pt>Lista para entregar</span></span></div><div class="parada suave p3"><img src="iconos/c_cobros.png" alt=""><span>Cobro al entregar<span class=pt>Queda en cartera</span></span></div></div>
+      <div class="esc" data-bg="#fde4d6"><div class="portatil"><img src="img/hero-indicadores.webp" alt="Indicadores de TAT Conecta en el computador" loading="lazy"></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_informes.png" alt=""><span>Ventas del día<span class=pt>Al instante</span></span></div><div class="parada suave p2"><img src="iconos/c_cobros.png" alt=""><span>Cartera por cobrar<span class=pt>Quién te debe</span></span></div><div class="parada suave p3"><img src="iconos/c_informes.png" alt=""><span>Descarga en Excel<span class=pt>Con un clic</span></span></div></div>
+      <div class="esc" data-bg="#e8e0f7"><div class="celular"><div class="pantalla"><img src="img/hero-portal.webp" alt="Portal de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_ventas.png" alt=""><span>Vendedor<span class=pt>Toma pedidos</span></span></div><div class="parada suave p2"><img src="iconos/c_despachos.png" alt=""><span>Conductor<span class=pt>Entrega y cobra</span></span></div><div class="parada suave p3"><img src="iconos/c_stock.png" alt=""><span>Bodega<span class=pt>Alista y controla</span></span></div><div class="parada suave p4"><img src="iconos/c_tablero.png" alt=""><span>Administrador<span class=pt>Ve todo</span></span></div></div>
     </div>
   </div>
 </section>
@@ -577,10 +588,8 @@ $("#form-contacto").addEventListener("submit", (e) => {
     botones.forEach(function(b,n){b.classList.toggle("on",n===i);b.setAttribute("aria-selected",n===i)});
     if(manual)reiniciar();
   }
-  function reiniciar(){clearInterval(t);if(!quieto&&!pausa)t=setInterval(function(){ir(i+1)},6500)}
+  function reiniciar(){clearInterval(t);if(!quieto)t=setInterval(function(){ir(i+1)},6500)}
   var pausa=false;
-  ["mouseenter","focusin","touchstart"].forEach(function(e){sec.addEventListener(e,function(){pausa=true;clearInterval(t)},{passive:true})});
-  ["mouseleave","focusout","touchend"].forEach(function(e){sec.addEventListener(e,function(){pausa=false;reiniciar()},{passive:true})});
   var x0=null;
   sec.addEventListener("touchstart",function(e){x0=e.touches[0].clientX},{passive:true});
   sec.addEventListener("touchend",function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(d)>50)ir(i+(d<0?1:-1),true)},{passive:true});
