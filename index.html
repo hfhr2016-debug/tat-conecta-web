@@ -67,7 +67,7 @@ nav.menu a.btn-entrar{border:2px solid var(--marca);color:var(--marca);backgroun
 
 /* Portada (carrusel) */
 .portada{position:relative;background:var(--papel);border-bottom:1px solid var(--linea);overflow:hidden;padding:0}
-.p-der{position:absolute;top:0;right:0;bottom:0;width:46%;background:var(--bgc,#dff3e6);transition:background .7s ease}
+.p-der{position:absolute;top:0;right:0;bottom:0;width:46%;background:var(--bgc,#b6efcf);transition:background .7s ease}
 .portada .caja{position:relative;display:grid;grid-template-columns:1fr 46%;gap:0;align-items:center;min-height:640px;max-width:none;width:100%;padding:0 0 0 clamp(20px,5vw,96px)}
 .izq{padding:56px 40px 64px 0;max-width:640px}
 .textos{display:grid;overflow:hidden;padding-bottom:4px}
@@ -97,12 +97,15 @@ nav.menu a.btn-entrar{border:2px solid var(--marca);color:var(--marca);backgroun
 .parada img{width:26px;height:26px}
 .p1{top:50px;left:-14px}.p2{top:190px;right:-20px}.p3{top:340px;left:-20px}.p4{top:470px;right:-10px}
 .esc .celular{margin:20px 0}
-.esc .p1{background:#fff0b3}.esc .p2{background:#c9f0d9}.esc .p3{background:#cfe0ff}.esc .p4{background:#ffd3e0}
-.esc .p1{left:3%}.esc .p2{right:3%}.esc .p3{left:3%}.esc .p4{right:3%}.esc .parada{font-size:1rem;font-weight:700;padding:9px 16px 9px 10px}.esc .parada.suave{animation:flota 4s ease-in-out infinite}
+.esc .parada{background:#fff;border:1px solid rgba(21,26,58,.08);border-radius:14px;box-shadow:0 10px 28px -8px rgba(21,26,58,.28),0 2px 6px rgba(21,26,58,.08);padding:9px 16px 9px 9px;gap:11px;font-weight:600;color:var(--tinta);line-height:1.2}
+.esc .parada img{box-sizing:content-box;padding:6px;border-radius:10px;width:26px!important;height:26px!important}
+.esc .p1 img{background:#fff0b3}.esc .p2 img{background:#c9f0d9}.esc .p3 img{background:#cfe0ff}.esc .p4 img{background:#ffd3e0}
+.esc .parada .pt{color:var(--tinta2)}
+.esc .p1{left:3%}.esc .p2{right:3%}.esc .p3{left:3%}.esc .p4{right:3%}.esc .parada{font-size:1rem}.esc .parada.suave{animation:flota 4s ease-in-out infinite}
 .esc .parada.suave:nth-of-type(2n){animation-delay:-2s}
 .esc .parada img,.esc .parada.suave img{width:30px;height:30px}
 .esc .parada .pt{display:block;font-weight:600;font-size:.84rem;color:var(--tinta2);line-height:1.1}
-.adorno{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);z-index:1}
+.adorno{position:absolute;border-radius:50%;background:rgba(255,255,255,.4);z-index:1}
 .ad1{width:220px;height:220px;top:30px;left:6%}.ad2{width:120px;height:120px;bottom:40px;right:8%}
 .esc.on .celular,.esc.on .portatil{animation:entra .7s ease both .45s}
 @keyframes flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
@@ -113,9 +116,9 @@ nav.menu a.btn-entrar{border:2px solid var(--marca);color:var(--marca);backgroun
   .p-der{display:none}
   .portada .caja{grid-template-columns:1fr;gap:0;min-height:0}
   .izq{padding:40px 0 28px}
-  .escena{background:var(--bgc,#dff3e6);transition:background .7s ease;min-height:600px}
+  .escena{background:var(--bgc,#b6efcf);transition:background .7s ease;min-height:600px}
   .portada .caja{padding:0}.izq{padding:40px 20px 28px;max-width:none}
-  .esc .parada{font-size:.84rem;padding:6px 11px 6px 7px}.esc .parada img{width:24px!important;height:24px!important}.celular{width:220px;height:460px}
+  .esc .parada{font-size:.84rem;padding:6px 11px 6px 7px}.esc .parada img{width:20px!important;height:20px!important}.celular{width:220px;height:460px}
   .esc .p1{left:3%}.esc .p2{right:3%}.esc .p3{left:3%}.esc .p4{right:3%}
 }
 
@@ -281,7 +284,7 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
       <div class="puntos" role="tablist" aria-label="Elegir diapositiva"></div>
     </div>
     <div class="escena">
-      <div class="esc on" data-bg="#dff3e6">
+      <div class="esc on" data-bg="#b6efcf">
         <svg class="ruta-svg" viewBox="0 0 420 560" preserveAspectRatio="none" aria-hidden="true"><path d="M70 70 C 340 90, 380 150, 330 210 S 40 300, 60 360 S 360 420, 350 500"/></svg>
         <div class="celular"><div class="pantalla"><img src="img/hero-venta.webp" alt="Pantalla de venta de TAT Conecta con productos, cantidades y total"></div></div>
         <div class="parada p1"><img src="iconos/c_visitas.png" alt="">Visita al cliente</div>
@@ -289,11 +292,11 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
         <div class="parada p3"><img src="iconos/c_despachos.png" alt="">Entrega en ruta</div>
         <div class="parada p4"><img src="iconos/c_cobros.png" alt="">Cobro registrado</div>
       </div>
-      <div class="esc" data-bg="#fbe0ea"><div class="celular"><div class="pantalla"><img src="img/hero-productos.webp" alt="Pantalla de productos de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_productos.png" alt=""><span>Importa desde Excel<span class=pt>Sin digitar uno por uno</span></span></div><div class="parada suave p2"><img src="iconos/c_stock.png" alt=""><span>Precio y existencias<span class=pt>Siempre a la vista</span></span></div><div class="parada suave p3"><img src="iconos/c_ventas.png" alt=""><span>Códigos de barras<span class=pt>Escanea con la cámara</span></span></div></div>
-      <div class="esc" data-bg="#f6ead3"><div class="celular"><div class="pantalla"><img src="img/hero-inventario.webp" alt="Pantalla de inventario de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_stock.png" alt=""><span>Aceite de girasol<span class=pt>Se está agotando</span></span></div><div class="parada suave p2"><img src="iconos/c_compras.png" alt=""><span>Compra recibida<span class=pt>Sube el inventario</span></span></div><div class="parada suave p3"><img src="iconos/c_productos.png" alt=""><span>Disponible y reservado<span class=pt>Sin sorpresas</span></span></div></div>
-      <div class="esc" data-bg="#dbe8fa"><div class="celular"><div class="pantalla"><img src="img/hero-rutas.webp" alt="Pantalla de rutas y despachos de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_despachos.png" alt=""><span>Conductor y vehículo<span class=pt>Asignados a la ruta</span></span></div><div class="parada suave p2"><img src="iconos/c_pedidos.png" alt=""><span>Remisión lista<span class=pt>Lista para entregar</span></span></div><div class="parada suave p3"><img src="iconos/c_cobros.png" alt=""><span>Cobro al entregar<span class=pt>Queda en cartera</span></span></div></div>
-      <div class="esc" data-bg="#fde4d6"><div class="portatil"><img src="img/hero-indicadores.webp" alt="Indicadores de TAT Conecta en el computador" loading="lazy"></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_informes.png" alt=""><span>Ventas del día<span class=pt>Al instante</span></span></div><div class="parada suave p2"><img src="iconos/c_cobros.png" alt=""><span>Cartera por cobrar<span class=pt>Quién te debe</span></span></div><div class="parada suave p3"><img src="iconos/c_informes.png" alt=""><span>Descarga en Excel<span class=pt>Con un clic</span></span></div></div>
-      <div class="esc" data-bg="#e8e0f7"><div class="celular"><div class="pantalla"><img src="img/hero-portal.webp" alt="Portal de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_ventas.png" alt=""><span>Vendedor<span class=pt>Toma pedidos</span></span></div><div class="parada suave p2"><img src="iconos/c_despachos.png" alt=""><span>Conductor<span class=pt>Entrega y cobra</span></span></div><div class="parada suave p3"><img src="iconos/c_stock.png" alt=""><span>Bodega<span class=pt>Alista y controla</span></span></div><div class="parada suave p4"><img src="iconos/c_tablero.png" alt=""><span>Administrador<span class=pt>Ve todo</span></span></div></div>
+      <div class="esc" data-bg="#ffc4d9"><div class="celular"><div class="pantalla"><img src="img/hero-productos.webp" alt="Pantalla de productos de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_productos.png" alt=""><span>Importa desde Excel<span class=pt>Sin digitar uno por uno</span></span></div><div class="parada suave p2"><img src="iconos/c_stock.png" alt=""><span>Precio y existencias<span class=pt>Siempre a la vista</span></span></div><div class="parada suave p3"><img src="iconos/c_ventas.png" alt=""><span>Códigos de barras<span class=pt>Escanea con la cámara</span></span></div></div>
+      <div class="esc" data-bg="#ffe08a"><div class="celular"><div class="pantalla"><img src="img/hero-inventario.webp" alt="Pantalla de inventario de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_stock.png" alt=""><span>Aceite de girasol<span class=pt>Se está agotando</span></span></div><div class="parada suave p2"><img src="iconos/c_compras.png" alt=""><span>Compra recibida<span class=pt>Sube el inventario</span></span></div><div class="parada suave p3"><img src="iconos/c_productos.png" alt=""><span>Disponible y reservado<span class=pt>Sin sorpresas</span></span></div></div>
+      <div class="esc" data-bg="#b4d4ff"><div class="celular"><div class="pantalla"><img src="img/hero-rutas.webp" alt="Pantalla de rutas y despachos de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_despachos.png" alt=""><span>Conductor y vehículo<span class=pt>Asignados a la ruta</span></span></div><div class="parada suave p2"><img src="iconos/c_pedidos.png" alt=""><span>Remisión lista<span class=pt>Lista para entregar</span></span></div><div class="parada suave p3"><img src="iconos/c_cobros.png" alt=""><span>Cobro al entregar<span class=pt>Queda en cartera</span></span></div></div>
+      <div class="esc" data-bg="#ffc7a3"><div class="portatil"><img src="img/hero-indicadores.webp" alt="Indicadores de TAT Conecta en el computador" loading="lazy"></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_informes.png" alt=""><span>Ventas del día<span class=pt>Al instante</span></span></div><div class="parada suave p2"><img src="iconos/c_cobros.png" alt=""><span>Cartera por cobrar<span class=pt>Quién te debe</span></span></div><div class="parada suave p3"><img src="iconos/c_informes.png" alt=""><span>Descarga en Excel<span class=pt>Con un clic</span></span></div></div>
+      <div class="esc" data-bg="#d3c0ff"><div class="celular"><div class="pantalla"><img src="img/hero-portal.webp" alt="Portal de TAT Conecta" loading="lazy"></div></div><span class="adorno ad1"></span><span class="adorno ad2"></span><div class="parada suave p1"><img src="iconos/c_ventas.png" alt=""><span>Vendedor<span class=pt>Toma pedidos</span></span></div><div class="parada suave p2"><img src="iconos/c_despachos.png" alt=""><span>Conductor<span class=pt>Entrega y cobra</span></span></div><div class="parada suave p3"><img src="iconos/c_stock.png" alt=""><span>Bodega<span class=pt>Alista y controla</span></span></div><div class="parada suave p4"><img src="iconos/c_tablero.png" alt=""><span>Administrador<span class=pt>Ve todo</span></span></div></div>
     </div>
   </div>
 </section>
