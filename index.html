@@ -118,15 +118,15 @@ nav.menu a.btn-entrar{border:2px solid var(--marca);color:var(--marca);backgroun
 }
 
 /* Lo que cambia */
-.cambia{background:var(--marca);color:#fff;position:relative;overflow:hidden}
-.cambia::before{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;border:4px dotted var(--ruta);opacity:.55}
-.cambia::after{content:"";position:absolute;left:-90px;bottom:-110px;width:300px;height:300px;border-radius:50%;background:#4338ca}
+.cambia{background:var(--fondo);color:var(--tinta);position:relative;overflow:hidden}
+.cambia::before{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;border:4px dotted var(--ruta);opacity:.45}
+.cambia::after{content:"";position:absolute;left:-90px;bottom:-110px;width:300px;height:300px;border-radius:50%;background:var(--marca-suave)}
 .cambia .caja{position:relative;z-index:1}
-.cambia .intro p{color:#d9d6ff}
-.cambia h2{color:#fff}
+.cambia .intro p{color:var(--tinta2)}
+.cambia h2{color:var(--tinta)}
 .trueques{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.trueque{background:var(--papel);color:var(--tinta);border-radius:20px;padding:24px 22px 26px;position:relative;border:3px solid var(--tinta);box-shadow:0 8px 0 0 var(--ruta)}
-.trueque .ico{width:68px;height:68px;border-radius:50%;background:var(--marca-suave);display:grid;place-items:center;margin:-46px 0 14px;border:3px solid var(--tinta)}
+.trueque{background:var(--papel);color:var(--tinta);border-radius:20px;padding:24px 22px 26px;position:relative;border:1px solid var(--linea);box-shadow:0 12px 30px -12px rgba(21,26,58,.18),0 4px 0 0 var(--ruta)}
+.trueque .ico{width:68px;height:68px;border-radius:50%;background:var(--marca-suave);display:grid;place-items:center;margin:-46px 0 14px;border:3px solid #fff;box-shadow:0 6px 16px -6px rgba(21,26,58,.3)}
 .trueque .ico img{width:44px;height:44px}
 .trueque h3{font-size:1.3rem;margin-bottom:12px}
 .trueque .antes{color:#8a90ad;text-decoration:line-through;text-decoration-thickness:2px;font-size:.95rem}
