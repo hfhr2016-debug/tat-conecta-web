@@ -347,7 +347,7 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
     <div class="pie-planes">
       <span id="txt-pago"></span>
       <span id="txt-extra"></span>
-      <span>¿Quieres ayuda para cargar tus datos y capacitar a tu personal? Tenemos un servicio de instalación y capacitación.</span>
+      <span id="txt-videos"></span>
     </div>
   </div>
 </section>
@@ -448,6 +448,7 @@ const PAGO_CON_TARJETA = false;       // Dejar en true solo cuando el pago con t
 const USUARIO_EXTRA = 0;              // Valor mensual de cada usuario adicional. 0 = no se ofrece (se sube de plan).
 const CORREO_SOPORTE = "tatconecta@gmail.com";
 const HORARIO_SOPORTE = "";           // Ej.: "lunes a viernes, 8:00 a. m. a 5:00 p. m. (hora de Colombia)". Vacío = no se muestra.
+const URL_VIDEOS = "";                // Enlace de YouTube con los videos tutoriales (lista de reproducción o canal). Si está vacío, dice "muy pronto".
 const WHATSAPP = "";                   // Ej.: "573001234567". Si está vacío, no se muestra.
 const PLANES = [
   { id: "basico", nombre: "Básico", icono: "iconos/basico_azul.png", quien: "Para vender y tomar pedidos en una empresa pequeña.", usuarios: 5, mes: 69000 },
@@ -504,6 +505,7 @@ const TXT_PROBAR = REGISTRO_ABIERTO ? "Probar gratis" : "Pedir acceso";
 const TXT_PROBAR_15 = REGISTRO_ABIERTO ? "Probar 15 días gratis" : "Pedir mi prueba gratis";
 document.querySelectorAll("[data-entrar-app]").forEach((a) => { a.href = URL_APP.replace(/\/$/, "") + "/?entrar=1"; });   // «Entrar»: para quien ya tiene su cuenta
 document.querySelectorAll("[data-app]").forEach((a) => { a.href = irApp; if (!REGISTRO_ABIERTO) a.textContent = a.classList.contains("btn-chico") ? TXT_PROBAR : TXT_PROBAR_15; });
+$("#txt-videos").innerHTML = URL_VIDEOS ? '¿Quieres aprender a usar TAT Conecta? <a href="' + URL_VIDEOS + '" target="_blank" rel="noopener">Mira los videos tutoriales gratuitos</a>.' : "Muy pronto: videos tutoriales gratuitos para aprender a usar TAT Conecta paso a paso.";
 if (WHATSAPP) { $("#wa-txt").innerHTML = '<a href="https://wa.me/' + WHATSAPP.replace(/\D/g, "") + '">' + WHATSAPP + "</a>"; } else { $("#wa-txt").parentElement.hidden = true; }
 
 const COLOR_PLAN = ["#fedc01", "#f60201", "#1f9d00"];
