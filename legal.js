@@ -5,7 +5,7 @@ window.LEGAL = {
   ciudad: "Bogotá D.C.",
   direccion: "por correo electrónico a tatconecta@gmail.com",
   correo: "tatconecta@gmail.com",
-  actualizado: "21 de octubre de 2026",
+  actualizado: "5 de noviembre de 2026",
   diasConservacion: 30
 };
 document.querySelectorAll("[data-l]").forEach((n) => {
