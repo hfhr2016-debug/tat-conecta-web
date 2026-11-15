@@ -448,30 +448,30 @@ const PAGO_CON_TARJETA = false;       // Dejar en true solo cuando el pago con t
 const USUARIO_EXTRA = 0;              // Valor mensual de cada usuario adicional. 0 = no se ofrece (se sube de plan).
 const CORREO_SOPORTE = "tatconecta@gmail.com";
 const HORARIO_SOPORTE = "";           // Ej.: "lunes a viernes, 8:00 a. m. a 5:00 p. m. (hora de Colombia)". Vacío = no se muestra.
-const URL_VIDEOS = "https://youtube.com/playlist?list=PLDodmjwDP2Lg";                // Enlace de YouTube con los videos tutoriales (lista de reproducción o canal). Si está vacío, dice "muy pronto".
+const URL_VIDEOS = "https://www.youtube.com/watch?v=8iN8kXYxk3Y&list=PLDodmjwDP2Lg";                // Enlace de YouTube con los videos tutoriales (lista de reproducción o canal). Si está vacío, dice "muy pronto".
 const WHATSAPP = "";                   // Ej.: "573001234567". Si está vacío, no se muestra.
 const PLANES = [
-  { id: "basico", nombre: "Básico", icono: "iconos/basico_azul.png", quien: "Para vender y tomar pedidos en una empresa pequeña.", usuarios: 5, mes: 69000 },
-  { id: "profesional", nombre: "Profesional", icono: "iconos/profesional_azul.png", quien: "Para empresas con inventario, compras y rutas.", usuarios: 15, mes: 149000, destacado: true },
-  { id: "empresarial", nombre: "Empresarial", icono: "iconos/empresarial_azul.png", quien: "Para distribuidoras con cartera, facturación y varios frentes.", usuarios: 40, mes: 299000 },
+  { id: "basico", nombre: "Básico", icono: "iconos/basico_azul.png", quien: "Para vender, tomar pedidos y emitir remisiones en una empresa pequeña.", usuarios: 5, mes: 69000 },
+  { id: "profesional", nombre: "Profesional", icono: "iconos/profesional_azul.png", quien: "Para controlar toda la operación: inventario, cobros, compras y rutas.", usuarios: 15, mes: 149000, destacado: true },
+  { id: "empresarial", nombre: "Empresarial", icono: "iconos/empresarial_azul.png", quien: "Para distribuidoras con informes, gastos, facturación y varios vehículos.", usuarios: 40, mes: 299000 },
 ];
-/* Qué incluye cada plan: [texto, básico, profesional, empresarial] */
+/* Qué incluye cada plan: [texto, básico, profesional, empresarial]. El texto puede ser una lista con uno por plan. */
 const INCLUYE = [
   ["Ventas y pedidos", 1, 1, 1],
   ["Clientes y productos", 1, 1, 1],
   ["Remisiones de entrega", 1, 1, 1],
   ["Lectura de códigos de barras con la cámara", 1, 1, 1],
-  ["Indicadores e informes", 0, 1, 1],
   ["Inventario", 0, 1, 1],
-  ["Compras", 0, 1, 1],
-  ["Rutas y despachos", 0, 1, 1],
+  ["Cobros y cartera", 0, 1, 1],
+  ["Compras y proveedores", 0, 1, 1],
+  ["Visitas a clientes", 0, 1, 1],
+  ["Indicadores", 0, 1, 1],
+  [["Rutas y despachos", "Rutas y despachos con 1 vehículo", "Rutas y despachos con varios vehículos"], 0, 1, 1],
   ["Avisos por WhatsApp", 0, 1, 1],
-  ["Cobros y cartera", 0, 0, 1],
+  ["Informes en Excel", 0, 0, 1],
   ["Gastos", 0, 0, 1],
-  ["Proveedores", 0, 0, 1],
-  ["Visitas a clientes", 0, 0, 1],
-  ["Facturación", 0, 0, 1],
   ["Ofertas y promociones", 0, 0, 1],
+  ["Facturación", 0, 0, 1],
 ];
 const SOPORTE = { basico: "Soporte por correo", profesional: "Soporte por correo", empresarial: "Soporte por correo, con atención prioritaria" };
 const FUNCIONES = [
@@ -481,15 +481,15 @@ const FUNCIONES = [
   ["c_productos.png", "Productos", "Catálogo con precios, fotos y códigos", 0],
   ["c_stock.png", "Inventario", "Existencias por bodega y por vehículo", 1],
   ["c_compras.png", "Compras", "Recibe mercancía y actualiza el inventario", 1],
-  ["c_proveedores.png", "Proveedores", "Directorio y compras por proveedor", 2],
+  ["c_proveedores.png", "Proveedores", "Directorio y compras por proveedor", 1],
   ["c_despachos.png", "Rutas y despachos", "Arma la ruta, asigna conductor y vehículo", 1],
-  ["c_visitas.png", "Visitas", "Qué clientes se visitaron y con qué resultado", 2],
-  ["c_cobros.png", "Cobros", "Cartera, abonos y comprobantes", 2],
+  ["c_visitas.png", "Visitas", "Qué clientes se visitaron y con qué resultado", 1],
+  ["c_cobros.png", "Cobros", "Cartera, abonos y comprobantes", 1],
   ["c_requisiciones.png", "Remisiones", "Bodega alista y el cliente recibe conforme", 0],
   ["c_facturacion.png", "Facturación", "Control de las facturas de lo entregado", 2],
   ["c_ofertas.png", "Ofertas", "Promociones y descuentos automáticos", 2],
   ["c_gastos.png", "Gastos", "Gastos de ruta y de operación", 2],
-  ["c_informes.png", "Informes", "Ventas, cartera, visitas y más, en Excel", 1],
+  ["c_informes.png", "Informes", "Ventas, cartera, visitas y más, en Excel", 2],
   ["c_tablero.png", "Indicadores", "Los números del día de un vistazo", 1],
   ["c_usuarios.png", "Usuarios", "Cada persona ve solo lo que le corresponde", 0],
 ];
@@ -515,7 +515,7 @@ function dibujarPlanes() {
   $("#cuadros").innerHTML = PLANES.map((p, i) => {
     const total = anual ? p.mes * 10 : p.mes;
     const nota = anual ? "Pagas 10 meses y usas 12 · equivale a " + plata(p.mes * 10 / 12) + " al mes" : "Pago cada mes";
-    const filas = INCLUYE.map((f) => `<li class="${f[i + 1] ? "si" : "no"}"><span class="m" aria-hidden="true">${f[i + 1] ? "✓" : "–"}</span><span>${f[0]}${f[i + 1] ? "" : '<span class="sr" style="position:absolute;left:-9999px"> (no incluido)</span>'}</span></li>`).join("");
+    const filas = INCLUYE.map((f) => `<li class="${f[i + 1] ? "si" : "no"}"><span class="m" aria-hidden="true">${f[i + 1] ? "✓" : "–"}</span><span>${Array.isArray(f[0]) ? f[0][i] : f[0]}${f[i + 1] ? "" : '<span class="sr" style="position:absolute;left:-9999px"> (no incluido)</span>'}</span></li>`).join("");
     const blanco = p.id !== "basico";
     return `<article class="plan plan-${p.id} ${p.destacado ? "fuerte" : ""}">
       ${p.destacado ? '<span class="cinta">El más elegido</span>' : ""}
