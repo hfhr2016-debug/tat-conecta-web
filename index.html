@@ -452,8 +452,8 @@ const URL_VIDEOS = "https://www.youtube.com/watch?v=8iN8kXYxk3Y&list=PLDodmjwDP2
 const WHATSAPP = "";                   // Ej.: "573001234567". Si está vacío, no se muestra.
 const PLANES = [
   { id: "basico", nombre: "Básico", icono: "iconos/basico_azul.png", quien: "Para vender, tomar pedidos y emitir remisiones en una empresa pequeña.", usuarios: 5, mes: 69000 },
-  { id: "profesional", nombre: "Profesional", icono: "iconos/profesional_azul.png", quien: "Para controlar toda la operación: inventario, cobros, compras y rutas.", usuarios: 15, mes: 149000, destacado: true },
-  { id: "empresarial", nombre: "Empresarial", icono: "iconos/empresarial_azul.png", quien: "Para distribuidoras con informes, gastos, facturación y varios vehículos.", usuarios: 40, mes: 299000 },
+  { id: "profesional", nombre: "Profesional", icono: "iconos/profesional_azul.png", quien: "Para controlar la operación: inventario, cobros, visitas y rutas.", usuarios: 15, mes: 149000, destacado: true },
+  { id: "empresarial", nombre: "Empresarial", icono: "iconos/empresarial_azul.png", quien: "Para distribuidoras con compras, indicadores, informes, gastos, facturación y varios vehículos.", usuarios: 40, mes: 299000 },
 ];
 /* Qué incluye cada plan: [texto, básico, profesional, empresarial]. El texto puede ser una lista con uno por plan. */
 const INCLUYE = [
@@ -463,9 +463,9 @@ const INCLUYE = [
   ["Lectura de códigos de barras con la cámara", 1, 1, 1],
   ["Inventario", 0, 1, 1],
   ["Cobros y cartera", 0, 1, 1],
-  ["Compras y proveedores", 0, 1, 1],
+  ["Compras y proveedores", 0, 0, 1],
   ["Visitas a clientes", 0, 1, 1],
-  ["Indicadores", 0, 1, 1],
+  ["Indicadores", 0, 0, 1],
   [["Rutas y despachos", "Rutas y despachos con 1 vehículo", "Rutas y despachos con varios vehículos"], 0, 1, 1],
   ["Avisos por WhatsApp", 0, 1, 1],
   ["Informes en Excel", 0, 0, 1],
@@ -480,8 +480,8 @@ const FUNCIONES = [
   ["c_clientes.png", "Clientes", "Datos, crédito y descuentos por cliente", 0],
   ["c_productos.png", "Productos", "Catálogo con precios, fotos y códigos", 0],
   ["c_stock.png", "Inventario", "Existencias por bodega y por vehículo", 1],
-  ["c_compras.png", "Compras", "Recibe mercancía y actualiza el inventario", 1],
-  ["c_proveedores.png", "Proveedores", "Directorio y compras por proveedor", 1],
+  ["c_compras.png", "Compras", "Recibe mercancía y actualiza el inventario", 2],
+  ["c_proveedores.png", "Proveedores", "Directorio y compras por proveedor", 2],
   ["c_despachos.png", "Rutas y despachos", "Arma la ruta, asigna conductor y vehículo", 1],
   ["c_visitas.png", "Visitas", "Qué clientes se visitaron y con qué resultado", 1],
   ["c_cobros.png", "Cobros", "Cartera, abonos y comprobantes", 1],
@@ -490,7 +490,7 @@ const FUNCIONES = [
   ["c_ofertas.png", "Ofertas", "Promociones y descuentos automáticos", 2],
   ["c_gastos.png", "Gastos", "Gastos de ruta y de operación", 2],
   ["c_informes.png", "Informes", "Ventas, cartera, visitas y más, en Excel", 2],
-  ["c_tablero.png", "Indicadores", "Los números del día de un vistazo", 1],
+  ["c_tablero.png", "Indicadores", "Los números del día de un vistazo", 2],
   ["c_usuarios.png", "Usuarios", "Cada persona ve solo lo que le corresponde", 0],
 ];
 
