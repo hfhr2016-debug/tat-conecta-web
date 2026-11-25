@@ -607,5 +607,22 @@ $("#form-contacto").addEventListener("submit", (e) => {
 })();
 </script>
 
+<script>
+/* El título «TAT Conecta» de arriba toma el mismo ancho que la frase de abajo («Toda tu empresa conectada»), con cualquier tipo de letra */
+(function(){
+  function ajustar(){
+    var t=document.querySelector(".marca .tit"),sm=document.querySelector(".marca .nom small");
+    if(!t||!sm||!sm.offsetWidth){if(t)t.style.fontSize="";return;}
+    t.style.fontSize="";
+    var r=document.createRange();r.selectNodeContents(sm);
+    var objetivo=r.getBoundingClientRect().width,actual=t.getBoundingClientRect().width,f=parseFloat(getComputedStyle(t).fontSize);
+    if(!objetivo||!actual||!f)return;
+    var k=objetivo/actual;if(k>0.8&&k<1.4)t.style.fontSize=(f*k)+"px";
+  }
+  window.addEventListener("load",ajustar);window.addEventListener("resize",ajustar);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(ajustar);
+  document.addEventListener("DOMContentLoaded",ajustar);
+})();
+</script>
 </body>
 </html>
