@@ -51,13 +51,13 @@ section{padding:84px 0}
 header.top{background:var(--papel);border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:20}
 header.top .caja{display:flex;align-items:center;gap:24px;height:88px}
 .marca{display:flex;align-items:center;gap:14px;font:800 1.9rem "Bricolage Grotesque",sans-serif;color:var(--tinta);text-decoration:none;letter-spacing:-.03em}
-.marca img{width:68px;height:68px;border-radius:16px;box-shadow:0 6px 0 -2px var(--marca),0 10px 22px -8px rgba(79,70,229,.55)}
+.marca img{width:80px;height:80px;filter:drop-shadow(0 6px 8px rgba(79,70,229,.35))}
 .marca .nom{display:flex;flex-direction:column;line-height:1;align-items:center}
 .marca .nom b{color:var(--marca);font-weight:800}
 .marca .tit{white-space:nowrap}
 .marca .nom small{display:block;font:italic 400 1.02rem Fraunces,Georgia,"Times New Roman",serif;letter-spacing:.01em;color:var(--marca);margin-top:3px;line-height:1.2}
 
-@media(max-width:560px){.marca .nom small{display:none}.marca{font-size:1.05rem;gap:6px;min-width:0;flex:0 1 auto}.marca img{width:40px!important;height:40px!important}nav.menu{gap:6px;flex:1 0 auto;justify-content:flex-end}nav.menu .btn{white-space:nowrap;padding:8px 10px;font-size:.82rem}header.top .caja{gap:10px}header.top .caja{height:76px}}
+@media(max-width:560px){.marca .nom small{display:none}.marca{font-size:1.05rem;gap:6px;min-width:0;flex:0 1 auto}.marca img{width:46px!important;height:46px!important}nav.menu{gap:6px;flex:1 0 auto;justify-content:flex-end}nav.menu .btn{white-space:nowrap;padding:8px 10px;font-size:.82rem}header.top .caja{gap:10px}header.top .caja{height:76px}}
 nav.menu{margin-left:auto;display:flex;gap:26px;align-items:center}
 nav.menu a{color:var(--tinta);text-decoration:none;font-weight:500;font-size:.98rem}
 nav.menu a:hover{color:var(--marca)}
@@ -234,7 +234,7 @@ footer{background:var(--tinta);color:#c3c8e6;padding:40px 0;font-size:.95rem}
 footer .caja{display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;align-items:flex-start}
 footer a{color:#fff}
 footer .pie-marca{display:flex;align-items:center;gap:20px}
-footer .pie-marca img{width:104px;height:104px;border-radius:24px;flex:none;box-shadow:0 5px 0 -2px var(--ruta)}
+footer .pie-marca img{width:104px;height:104px;flex:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))}
 footer .pie-marca b{color:#fff;font:800 1.7rem "Bricolage Grotesque",sans-serif;letter-spacing:-.02em}
 footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
 </style>
@@ -262,7 +262,7 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
 <section class="portada" id="carrusel" aria-roledescription="carrusel" aria-label="Lo que hace TAT Conecta">
   <div class="pista">
     <div class="dia" style="--g:linear-gradient(120deg,#3a32c4,#6d3df0 60%,#8b5cf6)"><div class="dia-in">
-        <div class="izq"><h1 class="tit">De la visita al cobro, todo en el mismo celular</h1><p class="lead">TAT Conecta es el programa para distribuidoras: tus vendedores toman pedidos, tú armas las rutas, controlas el inventario y cobras lo que te deben. Sin cuadernos ni hojas sueltas.</p>
+        <div class="izq"><h1 class="tit">De la visita al cobro, todo en la palma de tu mano</h1><p class="lead">Con TAT Conecta, gestionas toda la actividad de tu empresa de principio a fin: pedidos, rutas, inventario, cobros y mucho más, todo en una sola aplicación.</p>
           <div class="acciones"><a class="btn btn-ruta" data-app href="#">Probar 15 días gratis</a><a class="btn btn-borde" href="#planes">Ver planes</a></div>
           <p class="nota">No necesitas registrar ningún medio de pago. Creas tu empresa y empiezas hoy.</p></div>
         <div class="esc"><svg class="ruta-svg" viewBox="0 0 420 560" preserveAspectRatio="none" aria-hidden="true"><path d="M70 70 C 340 90, 380 150, 330 210 S 40 300, 60 360 S 360 420, 350 500"/></svg><div class="celular"><div class="pantalla"><img src="img/hero-venta.webp" alt="Pantalla de venta de TAT Conecta con productos, cantidades y total"></div></div><div class="parada p1"><img src="iconos/c_visitas.png" alt=""><span>Visita al cliente</span></div><div class="parada p2"><img src="iconos/c_pedidos.png" alt=""><span>Pedido tomado</span></div><div class="parada p3"><img src="iconos/c_despachos.png" alt=""><span>Entrega en ruta</span></div><div class="parada p4"><img src="iconos/c_cobros.png" alt=""><span>Cobro registrado</span></div></div>
@@ -425,7 +425,7 @@ footer .enlaces{display:flex;gap:20px;flex-wrap:wrap}
 
 <footer>
   <div class="caja">
-    <div class="pie-marca"><img src="img/logo.png" alt=""><div><b>TAT Conecta</b><br>Vende, reparte y cobra desde el celular.</div></div>
+    <div class="pie-marca"><img src="img/logo_pie.png" alt=""><div><b>TAT Conecta</b><br>Vende, reparte y cobra desde el celular.</div></div>
     <div class="enlaces">
       <a href="#funciones">Funciones</a><a href="#planes">Planes</a><a href="#preguntas">Preguntas</a><a href="#contacto">Contacto</a><a href="#soporte">Soporte</a>
       <a href="terminos/">Términos y condiciones</a><a href="privacidad/">Política de privacidad</a>
